@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material'
 import React, { useState, forwardRef } from 'react'
-import './Post.css'
+import '../css/Post.css'
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import InputOption from './InputOption';

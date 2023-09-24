@@ -9,6 +9,8 @@
     width: 100%;
     background-color: white;
     z-index: 999;
+    height: 50px;
+    gap: 950px;
 
 
 }
@@ -16,7 +18,7 @@
     display: flex;
 }
 
-.header__left > img{
+.header__left  img{
     object-fit: contain;
     height: 40px;
     margin-right: 10px;
@@ -41,4 +43,40 @@
 
 .header__right{
     display: flex;
+    
 }
+
+.dropdown {
+    position: absolute;
+    top: 110%;
+    right: 230px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1;
+    width: 300px;
+  }
+
+  profile-info {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .profile-info .name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .profile-info .university,
+  .profile-info .major {
+    font-size: 16px;
+    color: #777;
+  }
+
+  .user-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }

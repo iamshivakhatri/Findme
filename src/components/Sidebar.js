@@ -1,8 +1,8 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
-import "./Sidebar.css"
+import "../css/Sidebar.css"
 import { useSelector } from 'react-redux'
-import { selectUser } from './features/userSlice'
+import { selectUser } from '../features/userSlice'
 
 const Sidebar = () => {
     const user = useSelector(selectUser);

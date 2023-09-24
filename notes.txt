@@ -1,9 +1,22 @@
-npx create-react-app app-name  -- template redux
-sudo npm install -g firebase-tools
-deleting app.text,logo, startuptext.js, 
+at last
+1. firebase login
+2. firebase init
+3. use an existing projectId
+4. What do you want to use as your public directory?
+Ans: build
+5. Set up automatic builds and deploys with GitHub?
+Ans: No
+
+6. npm run build
+
+7. firebase deploy
 
 
-npm install @material-ui/core
 
-npm install @material-ui/icons
+npm material ui/core
+npm  materialui icons
+
+npm install react-router-dom
+
+
 

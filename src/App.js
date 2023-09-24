@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
-import './App.css';
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Feed from './Feed'
-import Widget from './Widget';
+import './css/App.css';
+import Header from './components/Header'
+import Sidebar from './components/Sidebar'
+import Feed from './components/Feed'
+import Widget from './components/Widget';
 import { useAutocomplete } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {login, logout, selectUser } from './features/userSlice';
-import { db, auth } from './Firebase'; 
-import Login from './Login';
+import { db, auth } from './components/Firebase'; 
+import Login from './components/Login';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProfilePage from './components/Profilepage'; 
+import Leftsidebar from './components/Leftsidebar';
 
 function App() {
   const user = useSelector(selectUser);
@@ -39,19 +42,30 @@ function App() {
     <div className="app">
     
       {/** Header */}
+      <Router> 
       <Header/>
-      {!user ? <Login/> : (
-         <div className="app__body">
-         <Sidebar/>
-         <Feed/>
-         <Widget/>
-          {/** Sidebar*/}
-          {/** Feed */}
-          {/** Widgets */}
+      <Leftsidebar/>
+
+      <Routes>
+      <Route
+    path="/"
+    element={
+      !user ? (
+        <Login /> 
+      ) : (
+        <div className="app__body">
+          {/**<Sidebar /> **/}
+          <Feed />
+          {/**  <Widget /> */}
         </div>
+      )
+    }
+  />
+     <Route path="/profile" element={<ProfilePage />} /> 
+</Routes>
 
 
-      )}
+      </Router>
 
       {/** App Body */}
 

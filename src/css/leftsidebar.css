@@ -1,0 +1,17 @@
+/* styles.css */
+.left-sidebar {
+    border: 1px solid #ccc;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 250px; /* Set the desired width for your sidebar */
+    height: 100%; /* Make the sidebar full height */
+    background-color: #f3f2ef; /* Set your desired background color */
+    color: rgb(0, 0, 0); /* Set text color */
+    /* Add any other styles you want for your sidebar */
+  }
+
+  .left-sidebar > .main__container{
+    margin-top: 20px;
+  }
+  

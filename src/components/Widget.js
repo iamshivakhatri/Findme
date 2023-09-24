@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Widget.css"
+import "../css/Widget.css"
 
 import CircleIcon from '@mui/icons-material/Circle';
 import InfoIcon from '@mui/icons-material/Info';

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import "./Feed.css"
+import "../css/Feed.css"
 import InputOption from './InputOption';
 import CreateIcon from '@mui/icons-material/Create';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -11,7 +11,7 @@ import Post from './Post'
 import { db, auth } from './Firebase'; 
 import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'; 
 import { useSelector } from 'react-redux';
-import {selectUser } from './features/userSlice';
+import {selectUser } from '../features/userSlice';
 import FlipMove from 'react-flip-move';
 
 /**
