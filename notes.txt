@@ -1,0 +1,9 @@
+npx create-react-app app-name  -- template redux
+sudo npm install -g firebase-tools
+deleting app.text,logo, startuptext.js, 
+
+
+npm install @material-ui/core
+
+npm install @material-ui/icons
+

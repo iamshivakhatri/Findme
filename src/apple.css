@@ -1,0 +1,7 @@
+.widget{
+    position: sticky;
+    top: 80px;
+    background-color: white;
+    border: 1px solid lightgray;
+
+}
