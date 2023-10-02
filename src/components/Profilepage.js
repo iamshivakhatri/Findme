@@ -1,62 +1,103 @@
+import React, {useEffect, useState} from 'react'
+import { db, auth } from './Firebase'; 
+import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'; 
 
-import "../css/profile.css"
-import React, { useState } from 'react';
+import Post from './Post'
+import { useSelector } from 'react-redux'
+import {selectUser } from '../features/userSlice';
+import FlipMove from 'react-flip-move';
+
 
 const Profilepage = () => {
-  const [userData, setUserData] = useState({
-    username: '',
-    displayName: '',
-    bio: '',
-    contactInfo: '',
-    location: '',
-    socialMediaLinks: '',
-    projectShowcase: [],
-    connectionStatus: {
-      followers: 0,
-      following: 0,
-      mutualConnections: 0,
-    },
-    projectStats: {
-      projectsPosted: 0,
-      collaborationsInitiated: 0,
-      projectViews: 0,
-    },
-    privacySettings: {},
-    collaborationHistory: [],
-    interests: [],
-    skills: [],
-    activityFeed: [],
-    achievements: [],
-    notifications: [],
-    messages: [],
-    customizationOptions: {},
-  });
+  const user = useSelector(selectUser);
+  const [posts, setPosts] = useState([{
+
+  }]);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, 'posts'),
+      orderBy('timestamp', 'desc')
+    );
+  
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
+
 
   return (
-    <div className="profile-section">
-      <div className="profile-header">
-        <img src="profile-image-url" alt="Profile" />
-        <h1>{userData.displayName}</h1>
-        <p>@{userData.username}</p>
+    <div className="user-profile">
+      {/* Cover Photo */}
+      <div className="cover-photo">
+        <img src= "" alt="Cover Photo" />
       </div>
-      <div className="profile-details">
-        <div className="profile-bio">
-          <h2>Bio</h2>
-          <p>{userData.bio}</p>
-        </div>
-        <div className="profile-contact">
-          <h2>Contact Information</h2>
-          <p>{userData.contactInfo}</p>
-        </div>
-        <div className="profile-location">
-          <h2>Location</h2>
-          <p>{userData.location}</p>
-        </div>
-        <div className="profile-social-media">
-          <h2>Social Media Links</h2>
-          <p>{userData.socialMediaLinks}</p>
-        </div>
-        {/* Add more sections for project showcase, connection status, project stats, etc. */}
+
+      {/* Profile Picture */}
+      <div className="profile-picture">
+        <img src={user.photoUrl} alt="Profile Photo" />
+      </div>
+
+      {/* User Information */}
+      <div className="user-info">
+        <h2>{user.displayName}</h2>
+        <p>Friends</p>
+        <p> Projects</p>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="navigation-tabs">
+        {/* Add navigation tabs here */}
+      </div>
+
+      {/* Feed Section */}
+      <FlipMove>
+         {posts.map(({ id, data }) => {
+    const { name, description, message, photoUrl } = data || {};
+    return (
+        <Post 
+            key={id}
+            name={name || ""}
+            description={description || ""}
+            message={message || ""}
+            photoUrl={photoUrl || ""}
+        />
+    );
+})}
+
+</FlipMove>
+
+      {/* About Section */}
+      <div className="about">
+        {/* Include user's bio, skills, interests, contact information, etc. */}
+      </div>
+
+      {/* Collaborations and Projects Section */}
+      <div className="collaborations">
+        {/* Include user's collaborations and projects */}
+      </div>
+
+      {/* Edit Profile Button */}
+      <button className="edit-profile-button">Edit Profile</button>
+
+      {/* Privacy Controls */}
+      <div className="privacy-controls">
+        {/* Add privacy settings here */}
+      </div>
+
+      {/* Activity and Notifications */}
+      <div className="activity">
+        {/* Display recent activity and notifications */}
+      </div>
+
+      {/* User Actions */}
+      <div className="user-actions">
+        {/* Include buttons for friend request, follow, message, etc. */}
       </div>
     </div>
   );
