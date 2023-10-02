@@ -1,103 +1,95 @@
-import React, {useEffect, useState} from 'react'
-import { db, auth } from './Firebase'; 
-import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'; 
+import React, { useEffect, useState } from 'react';
+import { db } from './Firebase';
+import { collection, onSnapshot, query, orderBy, where } from 'firebase/firestore';
 
-import Post from './Post'
-import { useSelector } from 'react-redux'
-import {selectUser } from '../features/userSlice';
+import Post from './Post';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 import FlipMove from 'react-flip-move';
-
+import '../css/profile.css';
 
 const Profilepage = () => {
   const user = useSelector(selectUser);
-  const [posts, setPosts] = useState([{
-
-  }]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const q = query(
-      collection(db, 'posts'),
-      orderBy('timestamp', 'desc')
-    );
-  
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      );
-    });
-  }, []);
+    const fetchData = async () => {
+      try {
+        if (!user || !user.email) {
+          // Handle the case where user or user.email is not defined.
+          return;
+        }
 
+        const q = query(
+          collection(db, 'posts'),
+          where('description', '==', user.email), // Filter posts by user's email
+          orderBy('timestamp', 'desc')
+        );
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          setPosts(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          );
+        });
+
+        return unsubscribe; // Unsubscribe from the snapshot listener when the component unmounts
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    // Check if user and user.email are defined before fetching data
+    if (user && user.email) {
+      fetchData();
+    }
+  }, [user]); // Add 'user' to the dependency array
 
   return (
-    <div className="user-profile">
-      {/* Cover Photo */}
-      <div className="cover-photo">
-        <img src= "" alt="Cover Photo" />
-      </div>
+    <div className="profilepage">
+      <div className="main__container">
 
-      {/* Profile Picture */}
-      <div className="profile-picture">
-        <img src={user.photoUrl} alt="Profile Photo" />
-      </div>
+         {/* Cover Photo */}
+         <div className="cover-photo">
+          <img src="" alt="Cover Photo" />
+        </div>
 
-      {/* User Information */}
-      <div className="user-info">
-        <h2>{user.displayName}</h2>
-        <p>Friends</p>
-        <p> Projects</p>
-      </div>
+        {/* Profile Picture */}
+        <div className="profile-picture">
+          {user && user.photoUrl ? (
+            <img src={user.photoUrl} alt="Profile Photo" />
+          ) : (
+            <span>No Profile Photo</span>
+          )}
+        </div>
 
-      {/* Navigation Tabs */}
-      <div className="navigation-tabs">
-        {/* Add navigation tabs here */}
-      </div>
+        {/* User Information */}
+        <div className="user-info">
+          <h2>{user && user.displayName}</h2>
+          <p>Friends</p>
+          <p>Projects</p>
+        </div>
 
-      {/* Feed Section */}
-      <FlipMove>
-         {posts.map(({ id, data }) => {
-    const { name, description, message, photoUrl } = data || {};
-    return (
-        <Post 
-            key={id}
-            name={name || ""}
-            description={description || ""}
-            message={message || ""}
-            photoUrl={photoUrl || ""}
-        />
-    );
-})}
 
-</FlipMove>
-
-      {/* About Section */}
-      <div className="about">
-        {/* Include user's bio, skills, interests, contact information, etc. */}
-      </div>
-
-      {/* Collaborations and Projects Section */}
-      <div className="collaborations">
-        {/* Include user's collaborations and projects */}
-      </div>
-
-      {/* Edit Profile Button */}
-      <button className="edit-profile-button">Edit Profile</button>
-
-      {/* Privacy Controls */}
-      <div className="privacy-controls">
-        {/* Add privacy settings here */}
-      </div>
-
-      {/* Activity and Notifications */}
-      <div className="activity">
-        {/* Display recent activity and notifications */}
-      </div>
-
-      {/* User Actions */}
-      <div className="user-actions">
-        {/* Include buttons for friend request, follow, message, etc. */}
+        {/* ... (the rest of your component remains the same) */}
+        {/* Feed Section */}
+        <FlipMove>
+          {posts.map(({ id, data }) => {
+            const { name, description, message, photoUrl } = data || {};
+            return (
+              <Post
+                key={id}
+                name={name || ''}
+                description={description || ''}
+                message={message || ''}
+                photoUrl={photoUrl || ''}
+              />
+            );
+          })}
+        </FlipMove>
+        {/* ... (the rest of your component remains the same) */}
       </div>
     </div>
   );
