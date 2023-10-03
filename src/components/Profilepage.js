@@ -61,6 +61,28 @@ const Profile = () => {
   </div>
 </div>
 
+<div className="profile__info">
+  <div className="profile__info-left">
+    <h1>{user?.displayName}</h1>
+    <p>{user?.email}</p>
+    <p>Location: {user?.location}</p>
+    
+    <p>Interests/Hobbies: {user?.interests}</p>
+  </div>
+  <div className="profile__info-right">
+    <br />
+    <p>School/University: {user?.university}</p>
+    <p>Major: {user?.major}</p>
+    <p>Graduation Year: {user?.graduationYear}</p>
+    <p>{user?.bio}</p>
+    <p>LinkedIn: <a href={user?.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></p>
+    <p>GitHub: <a href={user?.github} target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
+    {/* Add more sections for projects, achievements, contact info, etc. */}
+  </div>
+</div>
+
+
+
 
 
 

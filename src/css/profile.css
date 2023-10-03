@@ -1,22 +1,28 @@
+*{
+  margin: 0;
+}
 .profile{
-  margin-top: 150px;
+  margin-top: 10%;
+  margin-left: 10%;
 }
 
 
 .cover__photo{
-  height: 200px;
+
+  height: 300px;
   width: 800px;
   
 }
 
 .profile__photo{
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   border: 2px solid white;
   margin-top: -75px;
   margin-left: 20px;
   object-fit: cover;
+  border: black 2px solid;
 }
 
 .profile__photo img{
@@ -33,5 +39,46 @@
 }
 
 .profile__posts{
+  margin-top: 100px;
   max-width: 500px;
+}
+
+
+/* Styles for Profile Info Section */
+.profile__info {
+  display: flex;
+  justify-content: space-between; /* Create space between left and right columns */
+  padding: 20px;
+
+  border-radius: 8px;
+
+}
+
+.profile__info-left {
+  flex: 1; /* Take up 50% of the available space */
+}
+
+.profile__info-right {
+  flex: 1; /* Take up 50% of the available space */
+}
+
+/* Add more styles as needed for individual sections within left and right columns */
+
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+p {
+  margin: 5px 0;
+}
+
+a {
+  color: #007bff; /* Link color, adjust as needed */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
