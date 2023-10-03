@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Coverphoto from "../icons/cover_photo.jpg"
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { db } from "./Firebase";
@@ -49,6 +50,18 @@ const Profile = () => {
   return (
     <div className="profile">
 
+<div className="top__photo">
+  <div className="cover__photo">
+    {/* Your cover photo image goes here */}
+    <img src= {Coverphoto} alt="Cover Photo" />
+  </div>
+  <div className="profile__photo">
+    {/* Your profile photo image goes here */}
+    <img src= {user.photoUrl} alt="Profile Photo" />
+  </div>
+</div>
+
+
 
 
 
@@ -81,7 +94,7 @@ const Profile = () => {
         )}
       </div>
 
-      
+
     </div>
   );
 };

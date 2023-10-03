@@ -26,6 +26,7 @@ const Leftsidebar = () => {
 
         {/* Sidebar content */}
 
+        <div className="sidebar__link">
         <Link to="./profile" className="company-name">
           PROFILE
         </Link>
@@ -34,6 +35,10 @@ const Leftsidebar = () => {
           PROJECTS
         </Link>
 
+
+        </div>
+
+        
         
       </div>
     </div>

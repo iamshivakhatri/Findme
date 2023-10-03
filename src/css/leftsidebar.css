@@ -13,5 +13,42 @@
 
   .left-sidebar > .main__container{
     margin-top: 20px;
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 20px;
+    height: 100%;
   }
   
+
+  .sidebar__link{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-picture {
+    width: 100px; /* Set the profile picture size */
+    height: 100px;
+    border-radius: 50%; /* Make the profile picture round */
+    margin-bottom: 10px; /* Add spacing between the picture and text */
+  }
+  .major {
+    font-size: 18px; /* Set the font size for user's name */
+    font-weight: bold;
+  }
+  .sidebar__link {
+    margin-top: 20px; /* Add spacing between links and user info */
+  }  
+
+  .company-name {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 10px; /* Add spacing between links */
+    font-size: 16px; /* Set font size for links */
+  }
+  
+  .company-name:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }

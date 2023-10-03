@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import '../css/Header.css'
 import SearchIcon from '@mui/icons-material/Search';
-import LinkedinIcon from "../icons/Linkedin.png"
-import FindmeIcon from "../icons/findmelogo.png"
+import FindmeIcon from "../icons/flogo.png"
 import HeaderOption from './HeaderOption';
 import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
@@ -47,8 +46,8 @@ const Header = () => {
 
     <div className="header__left">
       <Link to={"/"}>
-        <img src = {FindmeIcon}  alt="" />
-        </Link>
+        <img src = {FindmeIcon}  alt="Find me logo" />
+     </Link>
 
         <div className="header__search">
             {/** Search Icon */}
