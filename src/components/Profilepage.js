@@ -14,6 +14,11 @@ import {
 import Post from "./Post";
 import FlipMove from "react-flip-move";
 import "../css/profile.css";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
+
+
 
 const Profile = () => {
   const user = useSelector(selectUser);
@@ -23,7 +28,7 @@ const Profile = () => {
     const fetchData = async () => {
       const q = query(
         collection(db, "posts"),
-        where("description", "==", "khatrishiva@gmail.com"), // Filter by the user's email
+        where("description", "==", user.email), // Filter by the user's email
         orderBy("timestamp", "desc")
       );
 
@@ -61,6 +66,9 @@ const Profile = () => {
   </div>
 </div>
 
+
+
+
 <div className="profile__info">
   <div className="profile__info-left">
     <h1>{user?.displayName}</h1>
@@ -75,10 +83,26 @@ const Profile = () => {
     <p>Major: {user?.major}</p>
     <p>Graduation Year: {user?.graduationYear}</p>
     <p>{user?.bio}</p>
-    <p>LinkedIn: <a href={user?.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></p>
-    <p>GitHub: <a href={user?.github} target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
-    {/* Add more sections for projects, achievements, contact info, etc. */}
   </div>
+  <div className="profile__logo">
+  <p>
+    <a href={user?.linkedin} target="_blank" rel="noopener noreferrer">
+      <LinkedInIcon />
+    </a>
+  </p>
+  <p>
+    <a href={user?.github} target="_blank" rel="noopener noreferrer">
+      <GitHubIcon />
+    </a>
+  </p>
+</div>
+</div>
+
+
+<div className="profile__bio">
+  <p>
+   This is my bio
+  </p>
 </div>
 
 

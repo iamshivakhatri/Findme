@@ -12,6 +12,7 @@ import Login from './components/Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProfilePage from './components/Profilepage'; 
 import Leftsidebar from './components/Leftsidebar';
+import Project from './components/projects';
 
 function App() {
   const user = useSelector(selectUser);
@@ -62,6 +63,7 @@ function App() {
     }
   />
      <Route path="/profile" element={<ProfilePage />} /> 
+     <Route path="/projects" element={<Project />} /> 
 </Routes>
 
 

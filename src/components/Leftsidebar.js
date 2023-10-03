@@ -31,7 +31,7 @@ const Leftsidebar = () => {
           PROFILE
         </Link>
 
-        <Link to="./profile" className="company-name">
+        <Link to="./projects" className="company-name">
           PROJECTS
         </Link>
 
