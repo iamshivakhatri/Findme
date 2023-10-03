@@ -30,6 +30,10 @@ const Leftsidebar = () => {
           PROFILE
         </Link>
 
+        <Link to="./profile" className="company-name">
+          PROJECTS
+        </Link>
+
         
       </div>
     </div>

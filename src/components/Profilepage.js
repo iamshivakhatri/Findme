@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../features/userSlice';
-import { db } from './Firebase';
-import { getDocs, collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
-import Post from './Post';
-import FlipMove from 'react-flip-move';
-import '../css/profile.css';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
+import { db } from "./Firebase";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import Post from "./Post";
+import FlipMove from "react-flip-move";
+import "../css/profile.css";
 
 const Profile = () => {
   const user = useSelector(selectUser);
@@ -14,9 +21,9 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
-        collection(db, 'posts'),
-        where('description', '==', 'khatrishiva@gmail.com'), // Filter by the user's email
-        orderBy('timestamp', 'desc')
+        collection(db, "posts"),
+        where("description", "==", "khatrishiva@gmail.com"), // Filter by the user's email
+        orderBy("timestamp", "desc")
       );
 
       const snapshot = await getDocs(q);
@@ -41,25 +48,40 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <div className="profile__header">
-        <h1>Your Profile</h1>
-      </div>
+
+
+
+
+
+
+
       <div className="profile__posts">
-        <FlipMove>
-          {posts.map(({ id, data }) => {
-            const { name, description, message, photoUrl } = data || {};
-            return (
-              <Post
-                key={id}
-                name={name || ''}
-                description={description || ''}
-                message={message || ''}
-                photoUrl={photoUrl || ''}
-              />
-            );
-          })}
-        </FlipMove>
+        {posts === null ? (
+          // Display a loading spinner while fetching data
+          <div className="loading-spinner"></div>
+        ) : posts.length === 0 ? (
+          // Display a message if no posts are found
+          <p>No posts found.</p>
+        ) : (
+          // Display posts when data is available
+          <FlipMove>
+            {posts.map(({ id, data }) => {
+              const { name, description, message, photoUrl } = data || {};
+              return (
+                <Post
+                  key={id}
+                  name={name || ""}
+                  description={description || ""}
+                  message={message || ""}
+                  photoUrl={photoUrl || ""}
+                />
+              );
+            })}
+          </FlipMove>
+        )}
       </div>
+
+      
     </div>
   );
 };
