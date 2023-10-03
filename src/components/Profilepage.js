@@ -2,55 +2,66 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
 import { db } from './Firebase';
-import { getDocs, collection, onSnapshot, query, orderBy, where } from 'firebase/firestore';
+import { getDocs, collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import Post from './Post';
 import FlipMove from 'react-flip-move';
-import Coverphoto from '../icons/cover_photo.jpg';
 import '../css/profile.css';
 
-const Profilepage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Profile = () => {
   const user = useSelector(selectUser);
+  const [posts, setPosts] = useState([]); // Initialize with an empty array
 
   useEffect(() => {
-    const q = query(
-      collection(db, 'posts'),
-      where('email', '==', 'khatrishiva@gmail.com'),
-      orderBy('timestamp', 'desc')
-    );
-  
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
+    const fetchData = async () => {
+      const q = query(
+        collection(db, 'posts'),
+        where('description', '==', 'khatrishiva@gmail.com'), // Filter by the user's email
+        orderBy('timestamp', 'desc')
       );
-    });
-  }, []);
+
+      const snapshot = await getDocs(q);
+
+      const postsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      setPosts(postsData);
+    };
+
+    fetchData(); // Call the asynchronous function to fetch data
+
+    // No need to unsubscribe, as this is not a real-time listener
+  }, [user]);
+
+  // Wait for the data to be fetched before rendering
+  if (posts.length === 0) {
+    return <p>No posts found.</p>;
+  }
 
   return (
-    <div className="profilepage">
-      <div className="main__container">
-      <FlipMove>
-         {posts.map(({ id, data }) => {
-    const { name, description, message, photoUrl } = data || {};
-    return (
-        <Post 
-            key={id}
-            name={name || ""}
-            description={description || ""}
-            message={message || ""}
-            photoUrl={photoUrl || ""}
-        />
-    );
-})}
-
-</FlipMove>
+    <div className="profile">
+      <div className="profile__header">
+        <h1>Your Profile</h1>
+      </div>
+      <div className="profile__posts">
+        <FlipMove>
+          {posts.map(({ id, data }) => {
+            const { name, description, message, photoUrl } = data || {};
+            return (
+              <Post
+                key={id}
+                name={name || ''}
+                description={description || ''}
+                message={message || ''}
+                photoUrl={photoUrl || ''}
+              />
+            );
+          })}
+        </FlipMove>
       </div>
     </div>
   );
 };
 
-export default Profilepage;
+export default Profile;
