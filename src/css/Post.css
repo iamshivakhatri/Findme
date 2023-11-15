@@ -3,6 +3,7 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 10px;
+    position: relative;
 }
 
 .post__header{
@@ -33,3 +34,24 @@
     display: flex;
     justify-content: space-around;
 }
+
+
+  .post__dots{
+    margin-left: auto;
+    cursor: pointer;
+  }
+  
+  .post__options{
+    position: absolute;
+    top: 20%;
+    right: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.184) 0px 0px 5px 1px;
+
+  }
+
+  .post__option{
+    cursor: pointer;
+  }

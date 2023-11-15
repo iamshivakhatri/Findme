@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react'
+// snapshot.docs is an object which stores all the documents in the collection
+ 
 
 import "../css/Feed.css"
 import InputOption from './InputOption';
@@ -95,12 +97,15 @@ const Feed = () => {
             </form>
             </div>
             <div className="feed__inputOptions">
-                {/** */}
+              Enter your thoughts
+              </div>
+            {/* <div className="feed__inputOptions">
+                
                 <InputOption Icon = {InsertPhotoIcon} title = "Photo" color = "#70B5F9"/>
                 <InputOption Icon = {VideocamIcon} title = "Video" color = "#E7A33E"/>
                 <InputOption Icon = {EventIcon} title = "Event" color = "#COCBCD"/>
                 <InputOption Icon = {ArticleIcon} title = "Write Article" color = "#7FC15E"/>
-            </div>
+            </div> */}
 
            
 
@@ -115,6 +120,7 @@ const Feed = () => {
     return (
         <Post 
             key={id}
+            id = {id}
             name={name || ""}
             description={description || ""}
             message={message || ""}
