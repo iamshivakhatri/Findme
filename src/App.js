@@ -62,8 +62,12 @@ function App() {
       )
     }
   />
-     <Route path="/profile" element={<ProfilePage user={user}/>} /> 
-     <Route path="/projects" element={<Project user={user}/>} /> 
+     <Route path="/profile" element={!user ? (
+        <Login /> 
+      ) : (<ProfilePage user={user}/>)} /> 
+     <Route path="/projects" element={!user ? (
+        <Login /> 
+      ) : (<Project user={user}/>)} /> 
 </Routes>
 
 
@@ -76,3 +80,13 @@ function App() {
 }
 
 export default App;
+
+/**
+ !user ? (
+        <Login /> 
+      ) : (<ProfilePage user={user}/>)
+
+    !user ? (
+        <Login /> 
+      ) : (<Project user={user}/>)
+ */
