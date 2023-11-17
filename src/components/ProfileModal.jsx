@@ -21,13 +21,6 @@ const ProfileModal = ({ isOpen, onClose, onSave, profileInfo }) => {
 
         <input
           type="text"
-          placeholder="Email"
-          value={editedProfileInfo.email}
-          onChange={(e) => setEditedProfileInfo({ ...editedProfileInfo, email: e.target.value })}
-        />
-
-        <input
-          type="text"
           placeholder="Location"
           value={editedProfileInfo.location}
           onChange={(e) => setEditedProfileInfo({ ...editedProfileInfo, location: e.target.value })}
@@ -59,6 +52,18 @@ const ProfileModal = ({ isOpen, onClose, onSave, profileInfo }) => {
           placeholder="Graduation Date"
           value={editedProfileInfo.graduationDate}
           onChange={(e) => setEditedProfileInfo({ ...editedProfileInfo, graduationDate: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Github url"
+          value={editedProfileInfo.github}
+          onChange={(e) => setEditedProfileInfo({ ...editedProfileInfo, github: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="LinkedIn url"
+          value={editedProfileInfo.linkedin}
+          onChange={(e) => setEditedProfileInfo({ ...editedProfileInfo, linkedin: e.target.value })}
         />
 
         <button onClick={handleSave}>Save</button>

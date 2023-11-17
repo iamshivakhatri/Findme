@@ -17,6 +17,7 @@ const BioEditModal = ({ isOpen, onClose, onSave, initialBio }) => {
           onChange={(e) => setEditedBio(e.target.value)}
         />
         <button onClick={handleSave}>Save</button>
+        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   );

@@ -21,6 +21,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ProfileModal from "./ProfileModal";
 import { Edit } from "@mui/icons-material";
 import BioEditModal from './BioEditModal';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'; 
+
 
 const Profile = () => {
   const user = useSelector(selectUser);
@@ -29,18 +32,11 @@ const Profile = () => {
   const [posts, setPosts] = useState([]); // Initialize with an empty array
 
   const [editMode, setEditMode] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState({ ...user }); // Initialize with user data
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [profileInfo, setProfileInfo] = useState({
-    name: "Shiva Khatri",
-    email: "shivakhatri@example.com",
-    location: "City, Country",
-    interests: "Web Development, Reading, Fitness",
-    university: "ABC University",
-    major: "Computer Science",
-    graduationDate: "May 2023",
     // Add other fields as needed
   });
   
@@ -56,6 +52,46 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    const fetchBio = async () => {
+      if (user){
+        const userBioRef = doc(db, 'userBio', user.uid);
+        try{
+          const bioSnapshot = await getDoc(userBioRef);
+          if (bioSnapshot.exists()){
+            const bioData = bioSnapshot.data();
+            setBio(bioData.bio);
+          }else{
+            console.log('User bio does not exist.');
+          }
+
+        }catch(error){
+          console.error('Error fetching user bio:', error);
+        }
+      }
+
+    };
+    const fetchProfileInfo = async () => {
+      if (user) {
+        const userProfileRef = doc(db, 'userProfiles', user.uid);
+  
+        try {
+          const profileSnapshot = await getDoc(userProfileRef);
+  
+          if (profileSnapshot.exists()) {
+            // Document exists, update the state with the data
+            const profileData = profileSnapshot.data();
+            setProfileInfo(profileData);
+          } else {
+            // Document doesn't exist, handle accordingly
+            console.log('User profile does not exist.');
+          }
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+          // Handle the error, e.g., show an error message to the user
+        }
+      }
+    };
+
     const fetchData = async () => {
       if (user) {
         const q = query(
@@ -76,6 +112,8 @@ const Profile = () => {
     };
 
     fetchData();
+    fetchProfileInfo();
+    fetchBio();
   }, [user]);
 
 
@@ -111,10 +149,38 @@ const Profile = () => {
   }
   
 
-  const handleModalSave = (editedProfileInfo) => {
+  const handleModalSave = async (editedProfileInfo) => {
     setProfileInfo(editedProfileInfo);
-    setUpdatedUser({ ...updatedUser, ...editedProfileInfo });
+
+
+
     // Save changes to the database if needed
+    const userProfileRef = doc(db, 'userProfiles', user.uid);
+
+  try {
+    await setDoc(userProfileRef, editedProfileInfo);
+    // Close the modal or perform any other actions
+    // (e.g., setIsModalOpen(false) if you have a modal open)
+  } catch (error) {
+    console.error('Error updating profile document: ', error);
+    // Handle the error, e.g., show an error message to the user
+  }
+  };
+
+  const handleBioSave = async (editedBio) => {
+    setBio(editedBio);
+    const data = {
+      bio: editedBio,
+    }
+
+    const userBioRef = doc(db, 'userBio', user.uid);
+
+    try {
+      await setDoc(userBioRef, data);
+    }catch(error){
+      console.error('Error updating bio document: ', error);
+
+    }
   };
 
   
@@ -145,7 +211,7 @@ const Profile = () => {
 
         <div className="profile__info-left">
           <h1>{profileInfo.name}</h1>
-          <p>{profileInfo.email}</p>
+          <p>{user.email}</p>
           <p>Location: {profileInfo.location}</p>
 
           <p>Interests/Hobbies: {profileInfo.interests}</p>
@@ -160,36 +226,41 @@ const Profile = () => {
         <div className="profile__logo">
           
           <p>
-            <a href={user?.linkedin} target="_blank" rel="noopener noreferrer">
+            <a href={profileInfo?.linkedin} target="_blank" rel="noopener noreferrer">
               <LinkedInIcon />
             </a>
           </p>
           <p>
-            <a href={user?.github} target="_blank" rel="noopener noreferrer">
+            <a href={profileInfo?.github} target="_blank" rel="noopener noreferrer">
               <GitHubIcon />
             </a>
           </p>
           
         </div>
         <div>
-           <MenuIcon onClick={() => setIsModalOpen(true)} />
+           <MoreHorizIcon onClick={() => setIsModalOpen(true)} />
           </div>
 
       </div>
 
       <div className="profile__bio">
-  <p>{bio}</p>
-  <div>
-    <MenuIcon onClick={handleOpenBioEditModal} />
-    <DeleteIcon onClick={() => setBio("Please Write Your Bio")} />
-  </div>
+        <div className="profile__bio-left">
+        <p>{bio}</p>
+        </div>
+  
+      <div className="profile__bio-right">
+        <div>
+        <MoreHorizIcon onClick={handleOpenBioEditModal} />
+        </div>
+       
+      </div>
 </div>
 
 {/* Bio Edit Modal */}
 <BioEditModal
   isOpen={isBioEditModalOpen}
   onClose={handleCloseBioEditModal}
-  onSave={(newBio) => setBio(newBio)}
+  onSave={handleBioSave}
   initialBio={bio}
 />
 

@@ -107,6 +107,7 @@ a:hover {
   border-radius: 10px; /* Add rounded corners */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   max-height: 300px; /* Set a maximum height for the content */
+  display: flex;
  
 }
 
@@ -116,4 +117,9 @@ a:hover {
   margin: 0; /* Remove default margin to prevent extra spacing */
    /* Preserve line breaks */
 }
+
+.profile__bio-left{
+  flex: 1;
+}
+
 
