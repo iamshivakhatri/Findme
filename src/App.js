@@ -62,8 +62,8 @@ function App() {
       )
     }
   />
-     <Route path="/profile" element={<ProfilePage />} /> 
-     <Route path="/projects" element={<Project />} /> 
+     <Route path="/profile" element={<ProfilePage user={user}/>} /> 
+     <Route path="/projects" element={<Project user={user}/>} /> 
 </Routes>
 
 

@@ -10,7 +10,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import EventIcon from '@mui/icons-material/Event';
 import ArticleIcon from '@mui/icons-material/Article';
 import Post from './Post'
-import { db, auth } from './Firebase'; 
+import { db } from './Firebase'; 
 import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'; 
 import { useSelector } from 'react-redux';
 import {selectUser } from '../features/userSlice';
@@ -29,6 +29,7 @@ import FlipMove from 'react-flip-move';
 
 const Feed = () => {
     const user = useSelector(selectUser);
+    console.log("This is user at the feed", user);
     const [input, setInput] = useState("")
     const [posts, setPosts] = useState([{
 

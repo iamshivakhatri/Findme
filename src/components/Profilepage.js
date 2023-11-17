@@ -24,7 +24,8 @@ import BioEditModal from './BioEditModal';
 
 const Profile = () => {
   const user = useSelector(selectUser);
-  console.log(user);
+ 
+  console.log("This is the user from the prop",user);
   const [posts, setPosts] = useState([]); // Initialize with an empty array
 
   const [editMode, setEditMode] = useState(false);
@@ -56,26 +57,53 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(
-        collection(db, "posts"),
-        where("description", "==", "khatrishiva@gmail.com"), // Filter by the user's email
-        orderBy("timestamp", "desc")
-      );
+      if (user) {
+        const q = query(
+          collection(db, "posts"),
+          where("description", "==", user.email), // Use user.email for the query
+          orderBy("timestamp", "desc")
+        );
 
-      const snapshot = await getDocs(q);
+        const snapshot = await getDocs(q);
 
-      const postsData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
+        const postsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }));
 
-      setPosts(postsData);
+        setPosts(postsData);
+      }
     };
 
-    fetchData(); // Call the asynchronous function to fetch data
-
-    // No need to unsubscribe, as this is not a real-time listener
+    fetchData();
   }, [user]);
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const q = query(
+  //       collection(db, "posts"),
+  //       where("description", "==", "khatrishiva@gmail.com"), // Filter by the user's email
+  //       orderBy("timestamp", "desc")
+  //     );
+
+  //     const snapshot = await getDocs(q);
+
+  //     const postsData = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       data: doc.data(),
+  //     }));
+
+
+  //     setPosts(postsData);
+  //   };
+  //   console.log("This is user inside the useeffect", user);  
+
+  //   fetchData(); // Call the asynchronous function to fetch data
+  //   console.log("This is user after fetchdata", user);  
+
+  //   // No need to unsubscribe, as this is not a real-time listener
+  // }, [user]);
 
   // Wait for the data to be fetched before rendering
   if (posts.length === 0) {

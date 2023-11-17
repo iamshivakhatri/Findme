@@ -1,92 +1,69 @@
-.projects > .main__container{
-    margin-top: 100px;
-    
-
-}
-
 /* projects.css */
 
 .projects {
-    padding: 20px;
-  }
-  
-  .main__container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  input,
-  textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  strong {
-    font-weight: bold;
-    margin-right: 5px;
-  }
-  
-  /* Add additional styling as needed */
-  /* Add card styling */
+  margin-top: 5%;
+  padding: 20px;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.main__container {
+  max-width: 1000px;
+  margin: 0 auto;
+
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Style for individual project card */
 .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: #fff;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px; /* Adjust as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
   }
-  
+
   .card-header {
+    font-size: 18px;
     font-weight: bold;
+    margin-bottom: 8px;
   }
-  
+
+  .card-description {
+    font-size: 14px;
+    color: #666;
+  }
+
   .card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 12px;
+
+    button {
+      margin-right: 8px;
+      padding: 8px;
+      cursor: pointer;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
   }
-  
-  /* Update list styling */
-  ul {
-    padding: 0;
-   
-  }
-  
+}
