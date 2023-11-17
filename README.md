@@ -1,46 +1,71 @@
-# Getting Started with Create React App and Redux
+# FindMe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+FindMe is a social networking platform built with Node.js, React, Redux, and Firebase, allowing users to connect, share, and discover interesting projects and people.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+FindMe is designed to foster a vibrant community where users can share their projects, connect with like-minded individuals, and explore exciting collaborations. The platform offers a seamless experience for user registration, authentication, and interaction through a modern and intuitive user interface.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Authentication**: Securely sign up and log in with email and password using Firebase Authentication.
+- **Project Showcase**: Share your posts and discover others' posts within the FindMe community.
+- **CRUD Operations**: Perform Create, Read, Update, and Delete operations on user details, bios, and projects.
+- **Responsive Design**: Enjoy a user-friendly experience on devices of all sizes.(coming soon)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **Frontend**: React, Redux, HTML, CSS, JavaScript
+- **Backend**: Node.js
+- **Database**: Firebase (Firestore)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Video Walkthrough
 
-### `npm run build`
+Here's a walkthrough of implemented required features:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `npm install` to install dependencies.
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To run FindMe locally, follow these steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Run the development server: `npm start`.
+2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to Contribute
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copyright@2023
+
+## Contact
+
+For inquiries or collaboration opportunities, feel free to reach out:
+
+- **Name**: Shiva Khatri
+- **Email**: shivakhatri0001@gmail.com
+- **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/shiva-khatri/)
+
+## Notes
+
+
+## License
+
+Copyright [2023] [Shiva Khatri]
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+> http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+
+We look forward to seeing your projects and contributions on FindMe!
