@@ -117,35 +117,7 @@ const Profile = () => {
   }, [user]);
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const q = query(
-  //       collection(db, "posts"),
-  //       where("description", "==", "khatrishiva@gmail.com"), // Filter by the user's email
-  //       orderBy("timestamp", "desc")
-  //     );
 
-  //     const snapshot = await getDocs(q);
-
-  //     const postsData = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       data: doc.data(),
-  //     }));
-
-
-  //     setPosts(postsData);
-  //   };
-  //   console.log("This is user inside the useeffect", user);  
-
-  //   fetchData(); // Call the asynchronous function to fetch data
-  //   console.log("This is user after fetchdata", user);  
-
-  //   // No need to unsubscribe, as this is not a real-time listener
-  // }, [user]);
-
-  // Wait for the data to be fetched before rendering
- 
-  
 
   const handleModalSave = async (editedProfileInfo) => {
     setProfileInfo(editedProfileInfo);
@@ -194,7 +166,7 @@ const Profile = () => {
         </div>
         <div className="profile__photo">
           {/* Your profile photo image goes here */}
-          <img src={user.photoUrl} alt="Profile Photo" />
+          <img src={user?.photoUrl} alt="Profile Photo" />
         </div>
       </div>
 
@@ -211,7 +183,7 @@ const Profile = () => {
 
         <div className="profile__info-left">
           <h1>{profileInfo.name}</h1>
-          <p>{user.email}</p>
+          <p>{user?.email}</p>
           <p>Location: {profileInfo.location}</p>
 
           <p>Interests/Hobbies: {profileInfo.interests}</p>
