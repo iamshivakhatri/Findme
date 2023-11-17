@@ -21,7 +21,7 @@ FindMe is designed to foster a vibrant community where users can share their pro
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features:
+Here's a walkthrough various features:
 
 <img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
@@ -37,8 +37,6 @@ To run FindMe locally, follow these steps:
 
 1. Run the development server: `npm start`.
 2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
-
-## How to Contribute
 
 
 
