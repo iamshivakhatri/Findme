@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
 import ProjectCard from './ProjectCard';
 import { db } from './Firebase';
-import { collection, query, where, getDocs, addDoc, deleteDoc, editDoc, doc } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import EditProjectModal from './EditProjectModal';
 
 const Projects = () => {
   const user = useSelector(selectUser);
@@ -13,11 +14,29 @@ const Projects = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [projects, setProjects] = useState([  ]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedProject, setEditedProject] = useState(null);
 
-  const handleEditProject = (editedProject) => {
-    // Implement edit logic
-    console.log('Edit project:', editedProject);
+  const handleEditProject = async (editedProject) => {
+    try {
+      // Update the project in the 'projects' collection in Firebase
+      const projectRef = doc(db, 'projects', editedProject.id);
+      await updateDoc(projectRef, {
+        title: editedProject.title,
+        description: editedProject.description,
+      });
+
+      // Update the state to reflect the changes
+      setProjects((prevProjects) =>
+        prevProjects.map((project) =>
+          project.id === editedProject.id ? { ...project, ...editedProject } : project
+        )
+      );
+    } catch (error) {
+      console.error('Error editing project:', error.message);
+    }
   };
+
 
   const handleDeleteProject = async (projectId) => {
     // Implement delete logic
@@ -97,6 +116,32 @@ const Projects = () => {
     fetchData(); // Call the asynchronous function to fetch data
   }, [user]);
 
+  const handleEditClick = (project) => {
+    setEditedProject(project);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveEdit = () => {
+    if (editedProject) {
+      handleEditProject(editedProject);
+    }
+    setIsEditModalOpen(false);
+  };
+
+  const handleCancelEdit = () => {
+    setEditedProject(null);
+    setIsEditModalOpen(false);
+  };
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedProject((prevProject) => ({
+      ...prevProject,
+      [name]: value,
+    }));
+  };
+
 
   return (
     <div className="projects">
@@ -126,11 +171,19 @@ const Projects = () => {
             <ProjectCard
               key={project.id}
               project={project}
-              onEdit={handleEditProject}
+              onEdit={handleEditClick}
               onDelete={handleDeleteProject}
             />
           ))}
         </div>
+
+        <EditProjectModal
+          isOpen={isEditModalOpen}
+          onInputChange={handleInputChange}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+          editedProject={editedProject}
+        />
       </div>
     </div>
   );
