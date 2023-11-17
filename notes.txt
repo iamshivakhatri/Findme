@@ -1,6 +1,7 @@
-at last
+at last to deploy
 1. firebase login
 2. firebase init
+select hosting
 3. use an existing projectId
 4. What do you want to use as your public directory?
 Ans: build

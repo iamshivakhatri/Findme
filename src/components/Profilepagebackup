@@ -144,7 +144,9 @@ const Profile = () => {
   // }, [user]);
 
   // Wait for the data to be fetched before rendering
- 
+  if (posts.length === 0) {
+    return <p>No posts found.</p>;
+  }
   
 
   const handleModalSave = async (editedProfileInfo) => {
@@ -185,95 +187,88 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      
- 
       <div className="top__photo">
         <div className="cover__photo">
-          {/* Your cover photo image goes here */}
           <img src={Coverphoto} alt="Cover Photo" />
         </div>
         <div className="profile__photo">
-          {/* Your profile photo image goes here */}
-          <img src={user.photoUrl} alt="Profile Photo" />
+          <img src={user?.photoUrl} alt="Profile Photo" />
         </div>
       </div>
-
+  
       <div className="profile__info">
-         {/* ... (existing code) */}
-
-        {/* Add an "Edit" button for other user information */}
-        <ProfileModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleModalSave}
-          profileInfo={profileInfo}
-        />
-
-        <div className="profile__info-left">
-          <h1>{profileInfo.name}</h1>
-          <p>{user.email}</p>
-          <p>Location: {profileInfo.location}</p>
-
-          <p>Interests/Hobbies: {profileInfo.interests}</p>
-        </div>
-        <div className="profile__info-right">
-          <br />
-          <p>School/University: {profileInfo.university}</p>
-          <p>Major: {profileInfo.major}</p>
-          <p>Graduation Year: {profileInfo.graduationDate}</p>
-          <p>{user?.bio}</p>
-        </div>
-        <div className="profile__logo">
-          
-          <p>
-            <a href={profileInfo?.linkedin} target="_blank" rel="noopener noreferrer">
-              <LinkedInIcon />
-            </a>
-          </p>
-          <p>
-            <a href={profileInfo?.github} target="_blank" rel="noopener noreferrer">
-              <GitHubIcon />
-            </a>
-          </p>
-          
-        </div>
-        <div>
-           <MoreHorizIcon onClick={() => setIsModalOpen(true)} />
-          </div>
-
+        {profileInfo ? (
+          <>
+            <ProfileModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              onSave={handleModalSave}
+              profileInfo={profileInfo}
+            />
+  
+            <div className="profile__info-left">
+              <h1>{profileInfo.name}</h1>
+              <p>{user?.email}</p>
+              <p>Location: {profileInfo.location}</p>
+              <p>Interests/Hobbies: {profileInfo.interests}</p>
+            </div>
+  
+            <div className="profile__info-right">
+              <br />
+              <p>School/University: {profileInfo.university}</p>
+              <p>Major: {profileInfo.major}</p>
+              <p>Graduation Year: {profileInfo.graduationDate}</p>
+              <p>{user?.bio}</p>
+            </div>
+  
+            <div className="profile__logo">
+              <p>
+                <a
+                  href={profileInfo?.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon />
+                </a>
+              </p>
+              <p>
+                <a
+                  href={profileInfo?.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GitHubIcon />
+                </a>
+              </p>
+            </div>
+  
+            <div>
+              <MoreHorizIcon onClick={() => setIsModalOpen(true)} />
+            </div>
+          </>
+        ) : (
+          <p>Loading profile information...</p>
+        )}
       </div>
-
+  
       <div className="profile__bio">
         <div className="profile__bio-left">
-        <p>{bio}</p>
+          {bio ? <p>{bio}</p> : <p>Loading bio...</p>}
         </div>
   
-      <div className="profile__bio-right">
-        <div>
-        <MoreHorizIcon onClick={handleOpenBioEditModal} />
+        <div className="profile__bio-right">
+          <div>
+            <MoreHorizIcon onClick={handleOpenBioEditModal} />
+          </div>
         </div>
-       
       </div>
-</div>
-
-{/* Bio Edit Modal */}
-<BioEditModal
-  isOpen={isBioEditModalOpen}
-  onClose={handleCloseBioEditModal}
-  onSave={handleBioSave}
-  initialBio={bio}
-/>
-
-
+  
       <div className="profile__posts">
         {posts === null ? (
-          // Display a loading spinner while fetching data
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner">Loading posts...</div>
         ) : posts.length === 0 ? (
-          // Display a message if no posts are found
           <p>No posts found.</p>
         ) : (
-          // Display posts when data is available
           <FlipMove>
             {posts.map(({ id, data }) => {
               const { name, description, message, photoUrl } = data || {};
@@ -290,11 +285,8 @@ const Profile = () => {
           </FlipMove>
         )}
       </div>
-   
-   
-   
-   </div>
+    </div>
   );
-};
+  
 
 export default Profile;
