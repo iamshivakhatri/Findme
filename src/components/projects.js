@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
 import ProjectCard from './ProjectCard';
 import { db } from './Firebase';
-import { collection, query, where, getDocs, addDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc, deleteDoc, editDoc, doc } from 'firebase/firestore';
 
 const Projects = () => {
   const user = useSelector(selectUser);
@@ -19,9 +19,20 @@ const Projects = () => {
     console.log('Edit project:', editedProject);
   };
 
-  const handleDeleteProject = (projectId) => {
+  const handleDeleteProject = async (projectId) => {
     // Implement delete logic
     console.log('Delete project with ID:', projectId);
+  
+    try {
+      // Delete the project from the 'projects' collection in Firebase
+      await deleteDoc(doc(db, 'projects', projectId));
+      // Update the state to reflect the deletion
+      setProjects((prevProjects) =>
+        prevProjects.filter((project) => project.id !== projectId)
+      );
+    } catch (error) {
+      console.error('Error deleting project:', error.message);
+    }
   };
 
   const handleAddProject = async (e) => {
@@ -43,13 +54,8 @@ const Projects = () => {
     try {
       // Add the new project to the 'projects' collection in Firebase
       const docRef = await addDoc(collection(db, 'projects'), newProject);
-  
-      // Add the project ID to the newProject object
-      newProject.id = docRef.id;
-  
-    
-     
-  
+      // Update the state with the new project
+    setProjects((prevProjects) => [...prevProjects, newProject]);
       // Clear the form fields
       setTitle('');
       setDescription('');
