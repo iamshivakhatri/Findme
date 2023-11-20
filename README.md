@@ -55,6 +55,9 @@ For inquiries or collaboration opportunities, feel free to reach out:
 🔗 [Here's a GIF walkthrough of the final project]
 <img src='./wholeapp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+- **Link**: [Link](https://bondness-e8bdc.web.app/)
+
+
 
 
 ## License
