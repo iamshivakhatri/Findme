@@ -142,10 +142,21 @@ const Projects = () => {
     }));
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter projects based on the search term
+  const filteredProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     <div className="projects">
       <div className="main__container">
+
+        
+
+
         <form onSubmit={handleAddProject}>
           <label>
             Title:
@@ -164,10 +175,18 @@ const Projects = () => {
           </label>
           <button type="submit">Add Project</button>
         </form>
+        
+        {/* Add a search bar */}
+        <input
+          type="text"
+          placeholder="Search by project title"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <h2>Projects</h2>
 
         <div className="card-list">
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}

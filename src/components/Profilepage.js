@@ -23,10 +23,13 @@ import { Edit } from "@mui/icons-material";
 import BioEditModal from './BioEditModal';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'; 
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 const Profile = () => {
   const user = useSelector(selectUser);
+  const [loading, setLoading] = useState(true);
  
   console.log("This is the user from the prop",user);
   const [posts, setPosts] = useState([]); // Initialize with an empty array
@@ -50,6 +53,9 @@ const Profile = () => {
   const handleCloseBioEditModal = () => {
     setIsBioEditModalOpen(false);
   };
+
+
+  
 
   useEffect(() => {
     const fetchBio = async () => {
@@ -93,6 +99,7 @@ const Profile = () => {
     };
 
     const fetchData = async () => {
+      setLoading(true); // Set loading to true when fetching data
       if (user) {
         const q = query(
           collection(db, "posts"),
@@ -107,7 +114,15 @@ const Profile = () => {
           data: doc.data(),
         }));
 
-        setPosts(postsData);
+        setTimeout(() => {
+          setPosts(postsData);
+          setLoading(false);
+        }, 2000);
+
+        
+
+
+
       }
     };
 
@@ -163,6 +178,7 @@ const Profile = () => {
         <div className="cover__photo">
           {/* Your cover photo image goes here */}
           <img src={Coverphoto} alt="Cover Photo" />
+         {/** <MoreHorizIcon onClick={handleCoverPhotoUpload} /> */} 
         </div>
         <div className="profile__photo">
           {/* Your profile photo image goes here */}
@@ -237,10 +253,12 @@ const Profile = () => {
 />
 
 
-      <div className="profile__posts">
-        {posts === null ? (
-          // Display a loading spinner while fetching data
-          <div className="loading-spinner"></div>
+<div className="profile__posts">
+        {loading ? (
+          // Display the loading spinner
+          <div className="loading-spinner">
+            <ClipLoader color="#36D7B7" loading={loading} size={50} />
+          </div>
         ) : posts.length === 0 ? (
           // Display a message if no posts are found
           <p>No posts found.</p>

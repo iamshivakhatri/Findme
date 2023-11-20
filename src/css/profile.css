@@ -12,6 +12,7 @@
   height: 300px;
   width: 800px;
   
+  
 }
 
 .profile__photo{
@@ -120,6 +121,10 @@ a:hover {
 
 .profile__bio-left{
   flex: 1;
+}
+
+.loading-spinner{
+  margin: auto;
 }
 
 

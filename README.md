@@ -52,7 +52,9 @@ For inquiries or collaboration opportunities, feel free to reach out:
 - **Email**: shivakhatri0001@gmail.com
 - **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/shiva-khatri/)
 
-## Notes
+🔗 [Here's a GIF walkthrough of the final project]
+<img src='./wholeapp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 
 ## License
