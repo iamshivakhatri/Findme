@@ -19,11 +19,7 @@ FindMe is designed to foster a vibrant community where users can share their pro
 - **Backend**: Node.js
 - **Database**: Firebase (Firestore)
 
-## Video Walkthrough
 
-Here's a walkthrough various features:
-
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Installation
 
